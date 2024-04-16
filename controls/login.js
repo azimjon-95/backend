@@ -83,8 +83,7 @@ const Register = async (req, res) => {
 // ----------------Delete User--------------------
 const deleteUser = async (req, res) => {
     try {
-        let { _id } = req.body;
-        let deleted = await User.findByIdAndDelete(_id);
+        let deleted = await User.findByIdAndDelete({ _id: req.params._id });
 
         if (!deleted) {
             return res.send({
@@ -100,9 +99,9 @@ const deleteUser = async (req, res) => {
 // ----------------Update User--------------------
 const updateUser = async (req, res) => {
     try {
-        let { id } = req.body;
+        let { _id } = req.body;
         let body = req.body;
-        let editUser = await User.updateMany({ _id: id }, body);
+        let editUser = await User.updateMany({ _id }, body);
 
         if (!editUser) {
             return res.send({
